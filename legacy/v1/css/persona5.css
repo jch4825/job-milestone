@@ -1,0 +1,460 @@
+/* ==========================================================================
+   직업 마1스톤 - 페르소나 5 (Persona 5) 스타일 테마 & 모션 그래픽 시스템
+   ========================================================================== */
+
+:root {
+  --p5-red: #e60012;
+  --p5-red-dark: #b3000d;
+  --p5-black: #0c0c10;
+  --p5-charcoal: #1c1c24;
+  --p5-white: #ffffff;
+  --p5-yellow: #ffd200;
+  --p5-accent-blue: #00d2ff;
+  --p5-font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+  --p5-font-display: 'Impact', 'Arial Black', sans-serif;
+  --p5-skew-deg: -7deg;
+}
+
+/* Base Halftone & Comic Background */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--p5-black);
+  color: var(--p5-white);
+  font-family: var(--p5-font-main);
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.p5-halftone-bg {
+  position: fixed;
+  inset: 0;
+  background-color: #121216;
+  background-image: 
+    radial-gradient(circle, rgba(230, 0, 18, 0.25) 2px, transparent 2px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+  background-size: 24px 24px, 12px 12px;
+  background-position: 0 0, 6px 6px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Dynamic Red Slash Streaks across Background */
+.p5-slash-stripes {
+  position: fixed;
+  inset: -20%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.15;
+  background: repeating-linear-gradient(
+    -35deg,
+    transparent,
+    transparent 40px,
+    var(--p5-red) 40px,
+    var(--p5-red) 60px
+  );
+}
+
+/* Top Navigation / Stage Header */
+.p5-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 28px;
+  background: var(--p5-black);
+  border-bottom: 5px solid var(--p5-red);
+  transform: skewX(var(--p5-skew-deg));
+  box-shadow: 0 8px 24px rgba(230, 0, 18, 0.35);
+}
+
+.p5-header > * {
+  transform: skewX(calc(var(--p5-skew-deg) * -1));
+}
+
+.p5-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.p5-badge {
+  background: var(--p5-red);
+  color: var(--p5-white);
+  font-weight: 900;
+  padding: 4px 14px;
+  font-size: 1.15rem;
+  letter-spacing: 1px;
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+  text-shadow: 2px 2px 0px #000;
+}
+
+.p5-main-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--p5-white);
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.p5-main-title .highlight {
+  background: var(--p5-yellow);
+  color: var(--p5-black);
+  padding: 2px 8px;
+  transform: rotate(-3deg);
+  display: inline-block;
+  font-weight: 900;
+}
+
+/* Milestone Progress Stars */
+.p5-milestone-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--p5-charcoal);
+  padding: 6px 16px;
+  border-left: 4px solid var(--p5-yellow);
+}
+
+.p5-milestone-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #bbb;
+}
+
+.p5-milestone-stars {
+  display: flex;
+  gap: 6px;
+}
+
+.p5-star {
+  font-size: 1.4rem;
+  color: #444;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s;
+}
+
+.p5-star.active {
+  color: var(--p5-yellow);
+  text-shadow: 0 0 10px rgba(255, 210, 0, 0.8);
+  transform: scale(1.15) rotate(5deg);
+}
+
+/* Jagged Speech Bubble & Dialogue Box */
+.p5-dialogue-box {
+  position: relative;
+  background: var(--p5-black);
+  border: 4px solid var(--p5-white);
+  box-shadow: 10px 10px 0px var(--p5-red);
+  padding: 20px 28px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  transform: skewX(-4deg);
+  transition: transform 0.2s ease;
+}
+
+.p5-dialogue-box > * {
+  transform: skewX(4deg);
+}
+
+.p5-speaker-tag {
+  position: absolute;
+  top: -22px;
+  left: 20px;
+  background: var(--p5-red);
+  color: var(--p5-white);
+  padding: 4px 18px;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  clip-path: polygon(0 0, 95% 0, 100% 100%, 5% 100%);
+  border: 2px solid var(--p5-white);
+  box-shadow: 3px 3px 0 #000;
+}
+
+.p5-dialogue-text {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: #f5f5f5;
+  min-height: 58px;
+  word-break: keep-all;
+}
+
+/* Persona 5 Cut-In Eyes Effect */
+.p5-cutin-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.p5-cutin-overlay.active {
+  opacity: 1;
+}
+
+.p5-cutin-banner {
+  width: 120%;
+  height: 220px;
+  background: var(--p5-red);
+  transform: rotate(-7deg) scale(0);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10%;
+  border-top: 8px solid var(--p5-black);
+  border-bottom: 8px solid var(--p5-black);
+  box-shadow: 0 0 50px rgba(230, 0, 18, 0.9);
+  transition: transform 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.p5-cutin-overlay.active .p5-cutin-banner {
+  transform: rotate(-7deg) scale(1);
+}
+
+.p5-cutin-portrait {
+  width: 180px;
+  height: 180px;
+  background: var(--p5-black);
+  border: 4px solid var(--p5-white);
+  clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p5-cutin-text {
+  color: var(--p5-white);
+  font-family: var(--p5-font-display);
+  font-size: 3.5rem;
+  letter-spacing: 2px;
+  text-shadow: 4px 4px 0px var(--p5-black);
+  text-align: right;
+  line-height: 1.1;
+}
+
+.p5-cutin-subtext {
+  font-size: 1.6rem;
+  color: var(--p5-yellow);
+  font-family: var(--p5-font-main);
+  font-weight: 900;
+}
+
+/* Post-it / Manager's Clue Note Board */
+.p5-clue-board {
+  position: absolute;
+  top: 18px;
+  right: 28px;
+  width: 280px;
+  background: var(--p5-yellow);
+  color: var(--p5-black);
+  padding: 16px 20px;
+  transform: rotate(3deg);
+  box-shadow: 6px 8px 18px rgba(0, 0, 0, 0.5);
+  border-bottom: 4px solid #cca500;
+  z-index: 5;
+  transition: transform 0.25s ease;
+}
+
+.p5-clue-board:hover {
+  transform: rotate(1deg) scale(1.03);
+}
+
+.p5-clue-tape {
+  position: absolute;
+  top: -12px;
+  left: 35%;
+  width: 80px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: rotate(-2deg);
+}
+
+.p5-clue-title {
+  font-size: 1.1rem;
+  font-weight: 900;
+  border-bottom: 2px dashed #333;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.p5-clue-content {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 700;
+  color: #222;
+}
+
+/* 3-Choice Action Cards (P5 Comic Card Style) */
+.p5-card-tray {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.p5-action-card {
+  flex: 1;
+  max-width: 320px;
+  background: var(--p5-charcoal);
+  border: 4px solid var(--p5-white);
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transform: skewX(-5deg);
+  box-shadow: 6px 6px 0px var(--p5-red);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.p5-action-card:hover {
+  transform: skewX(-7deg) translateY(-8px) scale(1.03);
+  background: #282834;
+  border-color: var(--p5-yellow);
+  box-shadow: 10px 10px 0px var(--p5-yellow);
+}
+
+.p5-action-card:active {
+  transform: skewX(-5deg) translateY(0);
+}
+
+.p5-action-card.card-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  filter: grayscale(0.8);
+}
+
+.p5-card-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 6px;
+  background: var(--p5-red);
+  border: 2px solid var(--p5-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transform: skewX(5deg);
+}
+
+.p5-card-icon-wrap svg {
+  width: 36px;
+  height: 36px;
+  fill: var(--p5-white);
+}
+
+.p5-card-text-wrap {
+  transform: skewX(5deg);
+  display: flex;
+  flex-direction: column;
+}
+
+.p5-card-step-badge {
+  font-size: 0.8rem;
+  color: var(--p5-yellow);
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.p5-card-action-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--p5-white);
+  line-height: 1.3;
+}
+
+/* Success Burst Animation */
+@keyframes p5-success-pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.p5-success-feedback {
+  border-color: var(--p5-yellow) !important;
+  background: #3b300a !important;
+  box-shadow: 0 0 25px rgba(255, 210, 0, 0.9) !important;
+  animation: p5-success-pop 0.3s ease;
+}
+
+/* Hint Shake Animation for Friendly Guidance */
+@keyframes p5-gentle-shake {
+  0%, 100% { transform: skewX(-5deg) translateX(0); }
+  25% { transform: skewX(-5deg) translateX(-6px); }
+  75% { transform: skewX(-5deg) translateX(6px); }
+}
+
+.p5-hint-guidance {
+  animation: p5-gentle-shake 0.4s ease;
+  border-color: var(--p5-accent-blue) !important;
+}
+
+/* P5 Button Styles */
+.p5-btn {
+  background: var(--p5-red);
+  color: var(--p5-white);
+  border: 3px solid var(--p5-white);
+  padding: 10px 24px;
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  transform: skewX(-6deg);
+  cursor: pointer;
+  box-shadow: 4px 4px 0px #000;
+  transition: all 0.15s ease;
+  outline: none;
+}
+
+.p5-btn:hover {
+  background: var(--p5-yellow);
+  color: var(--p5-black);
+  border-color: var(--p5-black);
+  box-shadow: 6px 6px 0px var(--p5-red);
+  transform: skewX(-8deg) translateY(-2px);
+}
+
+.p5-btn:active {
+  transform: skewX(-6deg) translateY(2px);
+  box-shadow: 2px 2px 0px #000;
+}
+
+.p5-btn.btn-secondary {
+  background: var(--p5-charcoal);
+  border-color: #666;
+}
+
+/* Screen Transitions (Slash Wipe) */
+.p5-transition-slash {
+  position: fixed;
+  inset: -50%;
+  background: var(--p5-red);
+  z-index: 999;
+  transform: rotate(-25deg) translateX(-150%);
+  pointer-events: none;
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.8);
+}
+
+.p5-transition-slash.active {
+  transform: rotate(-25deg) translateX(0%);
+}
+
+.p5-transition-slash.exit {
+  transform: rotate(-25deg) translateX(150%);
+}

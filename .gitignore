@@ -1,0 +1,16 @@
+# 받아서 다시 만드는 것
+node_modules/
+dist/
+*.log
+
+# 확인용 출력(tools 가 다시 만듦) · 원본 소리
+assets/_src/_check/
+assets/_src/audio/
+
+# 시스템·작업 임시 파일
+Thumbs.db
+desktop.ini
+.DS_Store
+__pycache__/
+.claude/
+scratch-file.png

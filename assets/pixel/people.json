@@ -1,0 +1,329 @@
+{
+ "image": "people.png",
+ "unit": 0.245,
+ "foot": {
+  "x": 71,
+  "y": 171
+ },
+ "source": "assets/_src/pixel/px_minigame_sheet.jpg + px_minigame_dust·bucket.jpg (tools/import-pixel-sheet.py)",
+ "frames": {
+  "sit_customer": {
+   "x": 0,
+   "y": 0,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "sit_student": {
+   "x": 142,
+   "y": 0,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "sit_auntie": {
+   "x": 284,
+   "y": 0,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "sit_daeri": {
+   "x": 426,
+   "y": 0,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "sit_hiker": {
+   "x": 568,
+   "y": 0,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "sit_grandma": {
+   "x": 710,
+   "y": 0,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "manager_idle": {
+   "x": 852,
+   "y": 0,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "minjae_idle": {
+   "x": 994,
+   "y": 0,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "grumble_customer": {
+   "x": 0,
+   "y": 174,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "grumble_student": {
+   "x": 142,
+   "y": 174,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "grumble_auntie": {
+   "x": 284,
+   "y": 174,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "grumble_daeri": {
+   "x": 426,
+   "y": 174,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "grumble_hiker": {
+   "x": 568,
+   "y": 174,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "grumble_grandma": {
+   "x": 710,
+   "y": 174,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "manager_cup": {
+   "x": 852,
+   "y": 174,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "minjae_tray": {
+   "x": 994,
+   "y": 174,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "walk_customer_0": {
+   "x": 0,
+   "y": 348,
+   "w": 142,
+   "h": 174,
+   "duration": 260
+  },
+  "walk_customer_1": {
+   "x": 142,
+   "y": 348,
+   "w": 142,
+   "h": 174,
+   "duration": 260
+  },
+  "walk_student_0": {
+   "x": 284,
+   "y": 348,
+   "w": 142,
+   "h": 174,
+   "duration": 260
+  },
+  "walk_student_1": {
+   "x": 426,
+   "y": 348,
+   "w": 142,
+   "h": 174,
+   "duration": 260
+  },
+  "walk_auntie_0": {
+   "x": 568,
+   "y": 348,
+   "w": 142,
+   "h": 174,
+   "duration": 260
+  },
+  "walk_auntie_1": {
+   "x": 710,
+   "y": 348,
+   "w": 142,
+   "h": 174,
+   "duration": 260
+  },
+  "walk_daeri_0": {
+   "x": 852,
+   "y": 348,
+   "w": 142,
+   "h": 174,
+   "duration": 260
+  },
+  "walk_daeri_1": {
+   "x": 994,
+   "y": 348,
+   "w": 142,
+   "h": 174,
+   "duration": 260
+  },
+  "slip_daeri": {
+   "x": 0,
+   "y": 522,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "search_customer": {
+   "x": 142,
+   "y": 522,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "wait_customer": {
+   "x": 284,
+   "y": 522,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "wait_student": {
+   "x": 426,
+   "y": 522,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "wait_daeri": {
+   "x": 568,
+   "y": 522,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  },
+  "manager_stop": {
+   "x": 710,
+   "y": 522,
+   "w": 142,
+   "h": 174,
+   "duration": 400
+  }
+ },
+ "tags": {
+  "sit_customer": [
+   "sit_customer"
+  ],
+  "sit_student": [
+   "sit_student"
+  ],
+  "sit_auntie": [
+   "sit_auntie"
+  ],
+  "sit_daeri": [
+   "sit_daeri"
+  ],
+  "sit_hiker": [
+   "sit_hiker"
+  ],
+  "sit_grandma": [
+   "sit_grandma"
+  ],
+  "manager_idle": [
+   "manager_idle"
+  ],
+  "minjae_idle": [
+   "minjae_idle"
+  ],
+  "grumble_customer": [
+   "grumble_customer"
+  ],
+  "grumble_student": [
+   "grumble_student"
+  ],
+  "grumble_auntie": [
+   "grumble_auntie"
+  ],
+  "grumble_daeri": [
+   "grumble_daeri"
+  ],
+  "grumble_hiker": [
+   "grumble_hiker"
+  ],
+  "grumble_grandma": [
+   "grumble_grandma"
+  ],
+  "manager_cup": [
+   "manager_cup"
+  ],
+  "minjae_tray": [
+   "minjae_tray"
+  ],
+  "walk_customer_0": [
+   "walk_customer_0"
+  ],
+  "walk_customer_1": [
+   "walk_customer_1"
+  ],
+  "walk_student_0": [
+   "walk_student_0"
+  ],
+  "walk_student_1": [
+   "walk_student_1"
+  ],
+  "walk_auntie_0": [
+   "walk_auntie_0"
+  ],
+  "walk_auntie_1": [
+   "walk_auntie_1"
+  ],
+  "walk_daeri_0": [
+   "walk_daeri_0"
+  ],
+  "walk_daeri_1": [
+   "walk_daeri_1"
+  ],
+  "slip_daeri": [
+   "slip_daeri"
+  ],
+  "search_customer": [
+   "search_customer"
+  ],
+  "wait_customer": [
+   "wait_customer"
+  ],
+  "wait_student": [
+   "wait_student"
+  ],
+  "wait_daeri": [
+   "wait_daeri"
+  ],
+  "manager_stop": [
+   "manager_stop"
+  ],
+  "walk_customer": [
+   "walk_customer_0",
+   "walk_customer_1"
+  ],
+  "walk_student": [
+   "walk_student_0",
+   "walk_student_1"
+  ],
+  "walk_auntie": [
+   "walk_auntie_0",
+   "walk_auntie_1"
+  ],
+  "walk_daeri": [
+   "walk_daeri_0",
+   "walk_daeri_1"
+  ]
+ }
+}

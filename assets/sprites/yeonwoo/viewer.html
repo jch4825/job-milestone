@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>마일스톤 SD 스프라이트 애니메이션 뷰어</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #181624;
+      color: #f1f2f6;
+      padding: 24px;
+    }
+    header {
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #332d4a;
+    }
+    h1 { font-size: 26px; margin-bottom: 8px; color: #ffbe76; display: flex; align-items: center; gap: 12px; }
+    p.sub { color: #a4b0be; font-size: 14px; line-height: 1.6; max-width: 900px; }
+    .badge {
+      background: #e15f41;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+    .controls {
+      margin: 20px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      background: #231f38;
+      padding: 14px 20px;
+      border-radius: 10px;
+      border: 1px solid #363056;
+    }
+    .controls label { font-size: 14px; color: #ced6e0; display: flex; align-items: center; gap: 10px; }
+    select, input[type="range"] {
+      background: #151322;
+      color: white;
+      border: 1px solid #4a4270;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: #231f38;
+      border: 1px solid #363056;
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+      transition: transform 0.15s ease;
+    }
+    .card:hover {
+      border-color: #574b90;
+    }
+    .card-title {
+      font-size: 17px;
+      font-weight: bold;
+      color: #f5cd79;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-korean { font-size: 13px; color: #70a1ff; font-weight: normal; background: #181624; padding: 2px 8px; border-radius: 6px; }
+    .preview-box {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      background: #151322;
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px dashed #48406f;
+      background-image: 
+        linear-gradient(45deg, #1c192d 25%, transparent 25%), 
+        linear-gradient(-45deg, #1c192d 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #1c192d 75%), 
+        linear-gradient(-45deg, transparent 75%, #1c192d 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+    }
+    .anim-canvas {
+      width: 128px;
+      height: 128px;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      background: transparent;
+      border: 2px solid #574b90;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .frames-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      flex-grow: 1;
+    }
+    .frame-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .frame-thumb {
+      width: 48px;
+      height: 48px;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      background: #110f1c;
+      border: 1px solid #363056;
+      border-radius: 6px;
+    }
+    .frame-label { font-size: 11px; color: #747d8c; }
+    .desc {
+      font-size: 12px;
+      color: #ced6e0;
+      line-height: 1.5;
+      background: #181624;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border-left: 3px solid #ff793f;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>연우 스프라이트 애니메이션 뷰어 <span class="badge">64×64 Pixel Art</span></h1>
+    <p class="sub">
+      <code>다운로드.png</code>의 원본 캐릭터 실루엣과 외곽선을 100% 완전하게 보존하여, 
+      <strong>상체-하체 분리 및 허리 끊김을 완전 박멸</strong>하고 자연스러운 픽셀 애니메이션으로 완성했습니다.
+    </p>
+  </header>
+
+  <div class="controls">
+    <label>
+      재생 속도:
+      <input type="range" id="speedRange" min="50" max="300" value="150" step="10">
+      <span id="speedVal">150ms</span>
+    </label>
+    <label>
+      확대 배율:
+      <select id="scaleSelect">
+        <option value="2">2x (128px)</option>
+        <option value="3" selected>3x (192px)</option>
+        <option value="4">4x (256px)</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="grid" id="animGrid"></div>
+
+  <script>
+    const animData = {"sweep": [{"frame": "sweep_0", "x": 0, "y": 0, "w": 64, "h": 64, "duration": 150}, {"frame": "sweep_1", "x": 64, "y": 0, "w": 64, "h": 64, "duration": 150}, {"frame": "sweep_2", "x": 128, "y": 0, "w": 64, "h": 64, "duration": 150}, {"frame": "sweep_3", "x": 192, "y": 0, "w": 64, "h": 64, "duration": 150}], "walk_side": [{"frame": "walk_side_0", "x": 0, "y": 64, "w": 64, "h": 64, "duration": 150}, {"frame": "walk_side_1", "x": 64, "y": 64, "w": 64, "h": 64, "duration": 150}, {"frame": "walk_side_2", "x": 128, "y": 64, "w": 64, "h": 64, "duration": 150}, {"frame": "walk_side_3", "x": 192, "y": 64, "w": 64, "h": 64, "duration": 150}], "walk_down": [{"frame": "walk_down_0", "x": 0, "y": 128, "w": 64, "h": 64, "duration": 150}, {"frame": "walk_down_1", "x": 64, "y": 128, "w": 64, "h": 64, "duration": 150}, {"frame": "walk_down_2", "x": 128, "y": 128, "w": 64, "h": 64, "duration": 150}, {"frame": "walk_down_3", "x": 192, "y": 128, "w": 64, "h": 64, "duration": 150}], "wash": [{"frame": "wash_0", "x": 0, "y": 192, "w": 64, "h": 64, "duration": 150}, {"frame": "wash_1", "x": 64, "y": 192, "w": 64, "h": 64, "duration": 150}, {"frame": "wash_2", "x": 128, "y": 192, "w": 64, "h": 64, "duration": 150}, {"frame": "wash_3", "x": 192, "y": 192, "w": 64, "h": 64, "duration": 150}], "idle": [{"frame": "idle_0", "x": 0, "y": 256, "w": 64, "h": 64, "duration": 150}, {"frame": "idle_1", "x": 64, "y": 256, "w": 64, "h": 64, "duration": 150}, {"frame": "idle_2", "x": 128, "y": 256, "w": 64, "h": 64, "duration": 150}, {"frame": "idle_3", "x": 192, "y": 256, "w": 64, "h": 64, "duration": 150}], "wave": [{"frame": "wave_0", "x": 0, "y": 320, "w": 64, "h": 64, "duration": 150}, {"frame": "wave_1", "x": 64, "y": 320, "w": 64, "h": 64, "duration": 150}, {"frame": "wave_2", "x": 128, "y": 320, "w": 64, "h": 64, "duration": 150}, {"frame": "wave_3", "x": 192, "y": 320, "w": 64, "h": 64, "duration": 150}], "serve": [{"frame": "serve_0", "x": 0, "y": 384, "w": 64, "h": 64, "duration": 150}, {"frame": "serve_1", "x": 64, "y": 384, "w": 64, "h": 64, "duration": 150}, {"frame": "serve_2", "x": 128, "y": 384, "w": 64, "h": 64, "duration": 150}, {"frame": "serve_3", "x": 192, "y": 384, "w": 64, "h": 64, "duration": 150}], "cheer": [{"frame": "cheer_0", "x": 0, "y": 448, "w": 64, "h": 64, "duration": 150}, {"frame": "cheer_1", "x": 64, "y": 448, "w": 64, "h": 64, "duration": 150}, {"frame": "cheer_2", "x": 128, "y": 448, "w": 64, "h": 64, "duration": 150}, {"frame": "cheer_3", "x": 192, "y": 448, "w": 64, "h": 64, "duration": 150}], "wipe": [{"frame": "wipe_0", "x": 0, "y": 512, "w": 64, "h": 64, "duration": 150}, {"frame": "wipe_1", "x": 64, "y": 512, "w": 64, "h": 64, "duration": 150}, {"frame": "wipe_2", "x": 128, "y": 512, "w": 64, "h": 64, "duration": 150}, {"frame": "wipe_3", "x": 192, "y": 512, "w": 64, "h": 64, "duration": 150}]};
+    const titles = {
+      "sweep": { name: "빗자루 쓸기 (Sweep)", desc: "몸체와 외곽선 100% 견고히 접지 + 빗자루 솔 탄성 휨과 바닥 먼지 퐁! 효과" },
+      "walk_side": { name: "측면 걷기 (Walk Side)", desc: "허리-에이프런 연결선 무결점 보존 + 자연스러운 다리 교차 통과 포즈" },
+      "wash": { name: "손씻기 (Wash Hands)", desc: "몸체 고정 상태에서 손바닥 싹싹 비비기 + 보글보글 거품 폼 & 물방울 스파클" },
+      "walk_down": { name: "정면 걷기 (Walk Down)", desc: "허리 분리 없이 왼발/오른발 번갈아 착지하는 안정적인 정면 걸음걸이" },
+      "idle": { name: "대기 및 눈 깜빡임 (Idle)", desc: "가슴 호흡과 깜빡이는 눈선 표정, 몸체 외곽선 완전 일체형" },
+      "wave": { name: "손 흔들기 인사 (Wave)", desc: "머리카락 외곽선 손상 없이 손가락만 까딱까딱 자연스럽게 흔들기" },
+      "serve": { name: "서빙 및 커피 김 (Serve)", desc: "안정적인 몸체와 트레이 위에서 모락모락 피어오르는 커피 김(Steam)" },
+      "cheer": { name: "환호 및 별빛 (Cheer)", desc: "발이 들뜨지 않는 안정적 만세 포즈와 양손 주위의 반짝이는 황금빛 별빛" },
+      "wipe": { name: "땀 닦기 / 휴식 (Wipe)", desc: "이마 외곽선 완벽 보존 + 이마 땀방울이 맺혔다 똑 털어지는 디테일" }
+    };
+
+    const sheetImg = new Image();
+    sheetImg.src = "spritesheet.png";
+
+    sheetImg.onload = () => {
+      const grid = document.getElementById("animGrid");
+      const speedRange = document.getElementById("speedRange");
+      const speedVal = document.getElementById("speedVal");
+      const scaleSelect = document.getElementById("scaleSelect");
+
+      let currentInterval = parseInt(speedRange.value);
+
+      speedRange.addEventListener("input", (e) => {
+        currentInterval = parseInt(e.target.value);
+        speedVal.innerText = currentInterval + "ms";
+      });
+
+      scaleSelect.addEventListener("change", (e) => {
+        const scale = parseInt(e.target.value);
+        document.querySelectorAll(".anim-canvas").forEach(c => {
+          c.style.width = (64 * scale) + "px";
+          c.style.height = (64 * scale) + "px";
+        });
+      });
+
+      for (const [key, frames] of Object.entries(animData)) {
+        const info = titles[key] || { name: key, desc: "" };
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const titleDiv = document.createElement("div");
+        titleDiv.className = "card-title";
+        titleDiv.innerHTML = `<span>${info.name}</span><span class="card-korean">${key}</span>`;
+        card.appendChild(titleDiv);
+
+        const previewBox = document.createElement("div");
+        previewBox.className = "preview-box";
+
+        const canvas = document.createElement("canvas");
+        canvas.className = "anim-canvas";
+        canvas.width = 64;
+        canvas.height = 64;
+        canvas.style.width = (64 * parseInt(scaleSelect.value)) + "px";
+        canvas.style.height = (64 * parseInt(scaleSelect.value)) + "px";
+        const ctx = canvas.getContext("2d");
+        ctx.imageSmoothingEnabled = false;
+
+        previewBox.appendChild(canvas);
+
+        const strip = document.createElement("div");
+        strip.className = "frames-strip";
+
+        frames.forEach((f, idx) => {
+          const item = document.createElement("div");
+          item.className = "frame-item";
+          const thumb = document.createElement("canvas");
+          thumb.className = "frame-thumb";
+          thumb.width = 64;
+          thumb.height = 64;
+          const tctx = thumb.getContext("2d");
+          tctx.imageSmoothingEnabled = false;
+          tctx.drawImage(sheetImg, f.x, f.y, 64, 64, 0, 0, 64, 64);
+          
+          const lbl = document.createElement("span");
+          lbl.className = "frame-label";
+          lbl.innerText = `F${idx}`;
+
+          item.appendChild(thumb);
+          item.appendChild(lbl);
+          strip.appendChild(item);
+        });
+
+        previewBox.appendChild(strip);
+        card.appendChild(previewBox);
+
+        const descDiv = document.createElement("div");
+        descDiv.className = "desc";
+        descDiv.innerText = info.desc;
+        card.appendChild(descDiv);
+
+        grid.appendChild(card);
+
+        // Animation runner
+        let frameIdx = 0;
+        let lastTime = 0;
+        function updateAnim(timestamp) {
+          if (!lastTime) lastTime = timestamp;
+          const elapsed = timestamp - lastTime;
+          if (elapsed >= currentInterval) {
+            lastTime = timestamp;
+            const f = frames[frameIdx];
+            ctx.clearRect(0, 0, 64, 64);
+            ctx.drawImage(sheetImg, f.x, f.y, 64, 64, 0, 0, 64, 64);
+            frameIdx = (frameIdx + 1) % frames.length;
+          }
+          requestAnimationFrame(updateAnim);
+        }
+        requestAnimationFrame(updateAnim);
+      }
+    };
+  </script>
+</body>
+</html>

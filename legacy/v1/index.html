@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>직업 마1스톤 (Job Milestone)</title>
+  <!-- Persona 5 Theme & Game Layout Styles -->
+  <link rel="stylesheet" href="./css/persona5.css">
+  <link rel="stylesheet" href="./css/game.css">
+</head>
+<body>
+
+  <!-- Dynamic Background Effects -->
+  <div class="p5-halftone-bg"></div>
+  <div class="p5-slash-stripes"></div>
+
+  <!-- Screen Slash Transition Wipe -->
+  <div id="transition-slash" class="p5-transition-slash"></div>
+
+  <!-- Persona 5 Cut-In Eyes Overlay -->
+  <div id="cutin-overlay" class="p5-cutin-overlay">
+    <div class="p5-cutin-banner">
+      <div class="p5-cutin-portrait">
+        <svg viewBox="0 0 100 100" width="80" height="80">
+          <polygon points="50,15 90,85 10,85" fill="#ffd200"/>
+          <circle cx="50" cy="60" r="14" fill="#000"/>
+        </svg>
+      </div>
+      <div class="p5-cutin-text">
+        <div id="cutin-speaker-name">PERFECT ACTION</div>
+        <div id="cutin-banner-text" class="p5-cutin-subtext">TAKE YOUR HEART!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- All-Out Attack Fullscreen Complete Banner -->
+  <div id="all-out-banner" class="all-out-banner">
+    <div id="all-out-title" class="all-out-title">MISSION COMPLETE</div>
+    <div id="all-out-subtitle" class="all-out-subtitle">정식 크루 임명을 축하합니다!</div>
+  </div>
+
+  <!-- Main Game Container -->
+  <div id="game-app">
+
+    <!-- Top Navigation / Header -->
+    <header class="p5-header">
+      <div class="p5-logo-wrap">
+        <div class="p5-badge">JOB MILESTONE</div>
+        <div class="p5-main-title">직업 <span class="highlight">마1스톤</span></div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <button id="header-chapter-badge" class="p5-btn btn-secondary" title="클릭하여 챕터 변경">CH.01</button>
+        <span id="header-chapter-title" style="font-weight: 800; font-size: 1.15rem; color: #fff;">제1막: 첫 관문</span>
+
+        <!-- Milestone Stars -->
+        <div class="p5-milestone-wrap">
+          <span class="p5-milestone-label">성장 마일스톤</span>
+          <div id="milestone-stars-container" class="p5-milestone-stars"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Visual Novel Stage Area -->
+    <main class="stage-container">
+      <div class="scene-bg-layer"></div>
+      <div class="scene-bg-overlay"></div>
+
+      <!-- Manager's Clue Post-it Board (오픈북 상시 단서) -->
+      <aside class="p5-clue-board">
+        <div class="p5-clue-tape"></div>
+        <div class="p5-clue-title">
+          <span>📌</span> <span id="clue-title-text">점장님의 메모</span>
+        </div>
+        <div id="clue-content-text" class="p5-clue-content">
+          1. 바른 자세로 인사하기<br>
+          2. 모르는 것은 솔직히 묻기<br>
+          3. 계약서 내용 확인하기
+        </div>
+      </aside>
+
+      <!-- Character Standings -->
+      <div class="character-stage">
+        <!-- Left: 주인공 연우 -->
+        <div id="char-slot-left" class="char-slot" data-character="연우">
+          <div id="char-svg-left" class="char-avatar-svg"></div>
+          <div id="char-name-left" style="font-weight: 900; background: rgba(0,0,0,0.8); padding: 4px 12px; margin-top: 6px; border: 1px solid #fff;">연우</div>
+        </div>
+
+        <!-- Right: 멘토 도현 / 점장님 -->
+        <div id="char-slot-right" class="char-slot" data-character="도현">
+          <div id="char-svg-right" class="char-avatar-svg"></div>
+          <div id="char-name-right" style="font-weight: 900; background: rgba(0,0,0,0.8); padding: 4px 12px; margin-top: 6px; border: 1px solid #fff;">도현 (멘토)</div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bottom Interaction Dock -->
+    <footer class="interactive-dock">
+
+      <!-- P5 Jagged Dialogue Box -->
+      <div id="dialogue-box" class="p5-dialogue-box">
+        <div id="dialogue-speaker" class="p5-speaker-tag">도현 (멘토)</div>
+        <div id="dialogue-text" class="p5-dialogue-text">대사가 로딩 중입니다...</div>
+      </div>
+
+      <!-- Chapter 2 & 3: 3-Choice Action Cards -->
+      <div id="card-tray" class="p5-card-tray" style="display: none;"></div>
+
+      <!-- Chapter 1: Multimodal 3-Way Interview Panel (Gemma 2B Engine) -->
+      <div id="interview-panel" class="interview-panel" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="llm-status-badge">
+            <span class="llm-indicator-dot"></span>
+            <span>Gemma 2B 로컬 AI 면접관 연결 중 (발달장애 면접 모드)</span>
+          </div>
+          <div id="interview-mic-status" style="font-weight: 800; color: var(--p5-yellow); font-size: 0.95rem;"></div>
+        </div>
+
+        <!-- 1) 키보드 타자형 + 마이크 음성인식형 -->
+        <div class="interview-input-row">
+          <input type="text" id="interview-input" class="interview-input" placeholder="답변을 입력하거나 아래 추천 버튼을 눌러보세요...">
+          <button id="interview-mic-btn" class="p5-btn btn-secondary" title="음성으로 말하기">🎙️ 음성</button>
+          <button id="interview-send-btn" class="p5-btn">전송 ▶</button>
+        </div>
+
+        <!-- 2) 버튼 클릭형 (Easy AAC 추천 칩) -->
+        <div>
+          <div style="font-size: 0.85rem; color: #aaa; margin-bottom: 6px; font-weight: 700;">
+            💡 원클릭 추천 답변 (버튼을 눌러 바로 말하기):
+          </div>
+          <div id="interview-presets" class="interview-preset-chips"></div>
+        </div>
+      </div>
+
+    </footer>
+
+  </div>
+
+  <!-- Contract Sign Modal (Chapter 1 Conclusion) -->
+  <div id="contract-modal" class="modal-overlay">
+    <div class="contract-paper">
+      <div class="contract-title">📄 표준근로계약서 (베이커리 카페 마일스톤)</div>
+      
+      <div class="contract-clause">
+        <strong>1. 근무 장소:</strong> 베이커리 카페 '마일스톤' 매장
+      </div>
+      <div class="contract-clause">
+        <strong>2. 업무 내용:</strong> 매장 오픈 비품 정돈, 빵 포장 및 음료 제조 보조, 위생 관리
+      </div>
+      <div class="contract-clause">
+        <strong>3. 근로 시간:</strong> 주 20시간 (월~금, 09:00 ~ 13:00, 휴게시간 30분 포함)
+      </div>
+      <div class="contract-clause">
+        <strong>4. 임금 (시급):</strong> 법정 최저시급 준수 및 주휴수당 지급
+      </div>
+      <div class="contract-clause">
+        <strong>5. 핵심 약속:</strong> 모르는 것은 선임에게 즉시 질문하고 솔직하게 보고하기!
+      </div>
+
+      <div class="signature-zone">
+        <div style="font-size: 1.1rem; font-weight: 800;">
+          근로자 성명: <span style="color: #b3000d; font-size: 1.3rem;">연우</span> (인)
+        </div>
+        <button id="contract-sign-btn" class="p5-btn">서명하고 첫 출근하기 ✍️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Entry Script (ES Modules) -->
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

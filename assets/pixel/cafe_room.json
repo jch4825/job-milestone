@@ -1,0 +1,62 @@
+{
+ "image": "cafe_room.png",
+ "source": "assets/_src/pixel/px_cafe_room.jpg (tools/import-pixel-sheet.py)",
+ "frames": {
+  "room": {
+   "x": 0,
+   "y": 0,
+   "w": 1280,
+   "h": 448
+  }
+ },
+ "spots": {
+  "counter": [
+   1023,
+   403
+  ],
+  "rack": [
+   1088,
+   425
+  ],
+  "bar": [
+   1149,
+   425
+  ],
+  "showcase": [
+   1209,
+   425
+  ],
+  "sink": [
+   991,
+   286
+  ],
+  "tables": [
+   795,
+   323
+  ],
+  "floor": [
+   898,
+   409
+  ],
+  "door": [
+   140,
+   405
+  ],
+  "staff": [
+   1207,
+   267
+  ],
+  "enter": [
+   88,
+   391
+  ],
+  "queue": [
+   986,
+   414
+  ],
+  "mark": [
+   819,
+   423
+  ]
+ }
+}

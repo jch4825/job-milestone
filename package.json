@@ -1,0 +1,37 @@
+{
+  "name": "job-milestone",
+  "version": "2.0.1",
+  "description": "직업 마1스톤 - 발달장애 학생을 위한 시행착오형 직업 적응 스토리 시뮬레이션 (베이커리 카페 마일스톤)",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "web": "node tools/serve.mjs",
+    "validate": "node tools/validate-scenarios.mjs",
+    "export": "node tools/export-script.mjs",
+    "assets": "node tools/scan-assets.mjs",
+    "audio": "node tools/import-audio.mjs && node tools/scan-assets.mjs",
+    "images": "python tools/import-images.py && node tools/scan-assets.mjs",
+    "movies": "node tools/import-movies.mjs && node tools/scan-assets.mjs",
+    "pixel": "python tools/import-pixel-sheet.py",
+    "credits": "node tools/export-credits.mjs",
+    "build:web": "node tools/build-web.mjs",
+    "lines": "node tools/export-lines.mjs",
+    "voices": "node tools/export-lines.mjs && node tools/run-voices.mjs",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux"
+  },
+  "keywords": ["job-education", "special-education", "visual-novel", "trial-and-error", "electron", "gemma", "accessibility"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "kr.jobmilestone.app",
+    "productName": "직업 마1스톤",
+    "files": ["index.html", "main.js", "preload.js", "css/**", "js/**", "assets/**", "!assets/**/*.md", "!assets/*_sheet.jpg", "!assets/_src/**"],
+    "win": { "target": "nsis" }
+  }
+}

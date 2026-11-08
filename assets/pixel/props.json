@@ -1,0 +1,161 @@
+{
+ "image": "props.png",
+ "unit": 0.1429,
+ "source": "assets/_src/pixel/px_cafe_objects.jpg (tools/import-pixel-sheet.py)",
+ "frames": {
+  "paper_cup": {
+   "x": 0,
+   "y": 0,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "ice_cup": {
+   "x": 112,
+   "y": 0,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "straw": {
+   "x": 224,
+   "y": 0,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "lid": {
+   "x": 336,
+   "y": 0,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "salt_bread": {
+   "x": 448,
+   "y": 0,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "croissant": {
+   "x": 560,
+   "y": 0,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "muffin": {
+   "x": 672,
+   "y": 0,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "americano": {
+   "x": 784,
+   "y": 0,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "latte": {
+   "x": 0,
+   "y": 112,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "milk": {
+   "x": 112,
+   "y": 112,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "juice": {
+   "x": 224,
+   "y": 112,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "dishcloth": {
+   "x": 336,
+   "y": 112,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "trash_bin": {
+   "x": 448,
+   "y": 112,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "chair": {
+   "x": 560,
+   "y": 112,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "light_switch": {
+   "x": 672,
+   "y": 112,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "badge": {
+   "x": 784,
+   "y": 112,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "cup_stack": {
+   "x": 0,
+   "y": 224,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "ice_cube": {
+   "x": 112,
+   "y": 224,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "wet_sign": {
+   "x": 224,
+   "y": 224,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "tray": {
+   "x": 336,
+   "y": 224,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "glass": {
+   "x": 448,
+   "y": 224,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  },
+  "tongs": {
+   "x": 560,
+   "y": 224,
+   "w": 112,
+   "h": 112,
+   "duration": 160
+  }
+ }
+}

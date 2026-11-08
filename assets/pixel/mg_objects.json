@@ -1,0 +1,175 @@
+{
+ "image": "mg_objects.png",
+ "unit": 1,
+ "source": "assets/_src/pixel/px_minigame_sheet.jpg + px_minigame_dust·bucket.jpg (tools/import-pixel-sheet.py)",
+ "frames": {
+  "tissue": {
+   "x": 0,
+   "y": 0,
+   "w": 57,
+   "h": 48,
+   "duration": 160
+  },
+  "straw_wrapper": {
+   "x": 57,
+   "y": 0,
+   "w": 57,
+   "h": 44,
+   "duration": 160
+  },
+  "ice_machine": {
+   "x": 114,
+   "y": 0,
+   "w": 110,
+   "h": 138,
+   "duration": 160
+  },
+  "glass": {
+   "x": 224,
+   "y": 0,
+   "w": 62,
+   "h": 84,
+   "duration": 160
+  },
+  "cup_box": {
+   "x": 286,
+   "y": 0,
+   "w": 109,
+   "h": 110,
+   "duration": 160
+  },
+  "ice_bin": {
+   "x": 395,
+   "y": 0,
+   "w": 110,
+   "h": 130,
+   "duration": 160
+  },
+  "cup_rack": {
+   "x": 505,
+   "y": 0,
+   "w": 80,
+   "h": 130,
+   "duration": 160
+  },
+  "showcase": {
+   "x": 585,
+   "y": 0,
+   "w": 153,
+   "h": 126,
+   "duration": 160
+  },
+  "kitchen_window": {
+   "x": 738,
+   "y": 0,
+   "w": 120,
+   "h": 136,
+   "duration": 160
+  },
+  "crumbs": {
+   "x": 858,
+   "y": 0,
+   "w": 77,
+   "h": 51,
+   "duration": 160
+  },
+  "coffee_ring": {
+   "x": 935,
+   "y": 0,
+   "w": 84,
+   "h": 73,
+   "duration": 160
+  },
+  "syrup": {
+   "x": 0,
+   "y": 138,
+   "w": 93,
+   "h": 66,
+   "duration": 160
+  },
+  "juice_small": {
+   "x": 93,
+   "y": 138,
+   "w": 78,
+   "h": 52,
+   "duration": 160
+  },
+  "juice_big": {
+   "x": 171,
+   "y": 138,
+   "w": 116,
+   "h": 74,
+   "duration": 160
+  },
+  "phone": {
+   "x": 287,
+   "y": 138,
+   "w": 90,
+   "h": 68,
+   "duration": 160
+  },
+  "plate": {
+   "x": 377,
+   "y": 138,
+   "w": 108,
+   "h": 72,
+   "duration": 160
+  },
+  "coffee_cup": {
+   "x": 485,
+   "y": 138,
+   "w": 92,
+   "h": 77,
+   "duration": 160
+  },
+  "bag_tied": {
+   "x": 577,
+   "y": 138,
+   "w": 92,
+   "h": 100,
+   "duration": 160
+  },
+  "bag_open": {
+   "x": 669,
+   "y": 138,
+   "w": 98,
+   "h": 100,
+   "duration": 160
+  },
+  "soap": {
+   "x": 767,
+   "y": 138,
+   "w": 56,
+   "h": 100,
+   "duration": 160
+  },
+  "towels": {
+   "x": 823,
+   "y": 138,
+   "w": 93,
+   "h": 74,
+   "duration": 160
+  },
+  "dust_small": {
+   "x": 916,
+   "y": 138,
+   "w": 43,
+   "h": 33,
+   "duration": 160
+  },
+  "dust_big": {
+   "x": 0,
+   "y": 238,
+   "w": 72,
+   "h": 56,
+   "duration": 160
+  },
+  "ice_bucket": {
+   "x": 72,
+   "y": 238,
+   "w": 90,
+   "h": 92,
+   "duration": 160
+  }
+ }
+}
