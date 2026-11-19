@@ -49,8 +49,8 @@ const SKINS = {
 };
 const LEVEL_NAME = { floor: ['', '먼지 조금', '먼지 많이', '먼지 뭉치'] };
 const LITTER = [['tissue', '휴지'], ['straw', '빨대 껍질'], ['cup', '빈 종이컵']];
-// 먼지 단계 그림(mg_objects): [그림, 배율] — 작은 털뭉치 → 큰 털뭉치를 키워 가며
-const DUST_ART = [null, ['dust_small', 1.1], ['dust_big', 0.8], ['dust_big', 1.15]];
+// 먼지 단계 그림(mg_objects): [그림, 배율] — 먼지 세 크기(작게 → 크게, 화면에서 너비 47·61·86px)
+const DUST_ART = [null, ['dust_small', 1], ['dust_mid', 0.75], ['dust_big', 0.8]];
 const LITTER_ART = { tissue: 'tissue', straw: 'straw_wrapper' };
 
 const skinOf = (opts) => SKINS[opts.skin] || SKINS.floor;

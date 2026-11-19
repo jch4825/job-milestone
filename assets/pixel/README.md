@@ -12,7 +12,7 @@
 - `props.png` / `props.json`: 종이컵·음료·빵·행주·쓰레기통 등 소품(옛 이름 그대로, unit 으로 옛 16px 크기). `px_cafe_objects.jpg`에서(2026-10-25).
 - `effects.png` / `effects.json`: 거품·물방울·반짝임·세균·김·하트·별·먼지 프레임(옛 이름 그대로). `px_cafe_objects.jpg`에서(2026-10-25).
 - `people.png` / `people.json`: 미니게임 손님·점장님·민재 30장(프레임 142×174, 연우와 같은 `unit`·`foot`). 앉아 먹기 `sit_*`·투덜 `grumble_*`(손님 6명) · 걷기 `walk_*`(4명, 2프레임 태그) · `wait_*` · `slip_daeri` · `search_customer` · `manager_idle|cup|stop` · `minjae_idle|tray`. `assets/_src/pixel/px_minigame_sheet.jpg`에서(2026-10-26, G-4).
-- `mg_objects.png` / `mg_objects.json`: 미니게임 물건·얼룩·먼지 24개(원본 크기, unit 1): 제빙기·유리컵·양동이·상자·얼음통·컵 보관대·진열장·주방 창·얼룩 3가지·주스 웅덩이 2크기·휴대폰·접시·커피잔·쓰레기봉투 2가지·물비누·종이 타월·휴지·빨대 포장지·먼지 2크기. 먼지(`px_minigame_dust.jpg`, 얼굴을 지움)·양동이(`px_minigame_bucket.jpg`)만 다른 그림에서.
+- `mg_objects.png` / `mg_objects.json`: 미니게임 물건·얼룩·먼지 25개(원본 크기, unit 1): 제빙기·유리컵·양동이·상자·얼음통·컵 보관대·진열장·주방 창·얼룩 3가지·주스 웅덩이 2크기·휴대폰·접시·커피잔·쓰레기봉투 2가지·물비누·종이 타월·휴지·빨대 포장지·먼지 3크기. 먼지(`px_minigame_dust.jpg`: 먼지 칸만 다시 그린 2K 그림을 반으로 줄여, 2026-11-19)·양동이(`px_minigame_bucket.jpg`)만 다른 그림에서.
 - `cafe_tileset.png` / `cafe_tileset.json`: 16×16 카페 타일셋(옛 그림, 매장 그림이 없을 때만 씀)
 - `acha_bubble.png`: 실패 결과 화면에 쓸 `아차!` 말풍선
 - `preview.png`: 검수용 4배 확대 미리보기(생성 스크립트를 실행하면 만들어짐, 게임에는 쓰지 않아 지워 둠)

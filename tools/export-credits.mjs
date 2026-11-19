@@ -42,7 +42,7 @@ function cleanText(t) {
     .replace(/[\w.+-]+@[\w-]+\.[\w.]+/g, '(메일 주소)')            // 메일 주소 가리기
     .trim();
 }
-const AUTO = /^작업 중에 사용량 한도에 도달했지만/;
+const AUTO = /^(작업 중에 사용량 한도에 도달했지만|I hit my usage limit while you were working)/;
 const SKIP = /^(This session is being continued|<command-|<local-command|Caveat:|\[Request interrupted|<task-notification>)/;
 /**
  * 요청 기록에서 빼는 대화(사용자 결정, 2026-10-26): 같은 폴더에서 한 다른 프로그램(보드게임) 작업과, 다 만든 뒤의 마무리 대화.

@@ -322,7 +322,8 @@ Background: one solid flat chroma-key green (#00FF00) over the whole image. No g
 ```
 
 ### G-4. SD 픽셀 미니게임 사람·물건·얼룩 (2026-10-25, Flow로 제작) ✅ 받음·적용
-> 같은 프롬프트로 만든 5장 중 **연우 시트와 같은 픽셀 결이고 칸이 프롬프트대로인 정사각형 1장**(`px_minigame_sheet.jpg`)에서 사람 30장·물건 24개를 잘랐습니다(`npm run pixel` → `assets/pixel/people.png`·`mg_objects.png`, 검수 문서 N-28). 나머지 4장(1376×768)은 매끈한 스티커 그림체라 사람·물건은 쓰지 않고, 두 장에서 한 가지씩만 가져왔습니다: **먼지**(5장 모두 토끼·쥐처럼 그려져서 털뭉치에 가장 가까운 그림을 눈·입을 지워, `px_minigame_dust.jpg`) · **빈 양동이**(이 시트의 양동이는 얼음이 담겨 있어서, `px_minigame_bucket.jpg`). 안 쓴 2장은 휴지통.
+> 같은 프롬프트로 만든 5장 중 **연우 시트와 같은 픽셀 결이고 칸이 프롬프트대로인 정사각형 1장**(`px_minigame_sheet.jpg`)에서 사람 30장·물건 25개를 잘랐습니다(`npm run pixel` → `assets/pixel/people.png`·`mg_objects.png`, 검수 문서 N-28). 나머지 4장(1376×768)은 매끈한 스티커 그림체라 사람·물건은 쓰지 않고, **빈 양동이**만 가져왔습니다(이 시트의 양동이는 얼음이 담겨 있어서, `px_minigame_bucket.jpg`). 안 쓴 장은 휴지통.
+> **먼지**: 5장 모두 'dust bunny'를 글자 그대로 토끼·쥐처럼 그려서, 처음에는 털뭉치에 가장 가까운 그림의 눈·입을 지워 썼습니다. 2026-11-19 쓰던 시트를 Flow 고치기로 먼지 세 칸만 다시 그려 바꿨습니다(`px_minigame_dust.jpg`, 2K, 검수 문서 N-35). 고치기 프롬프트: `Keep everything else exactly the same. Only redraw row 6, cells 4-6: three plain clumps of grey dust and lint (small, medium, big), like fluff swept from a floor. No face, no eyes, no ears, no tail, not an animal.` 아래 프롬프트의 6줄도 같은 뜻으로 고쳐 두었습니다.
 
 매장·가구는 새 그림체가 됐지만, 미니게임 안의 **사람은 동그란 일러스트 얼굴**, **물건·얼룩은 CSS 도형**이라 픽셀 방 안에서 여전히 튑니다(사용자: "테이블 닦기 같은 경우에도 새로 이미지 필요하지 않니?"). 미니게임마다 살펴본 결과:
 
@@ -360,7 +361,7 @@ Row 2: the same six customers sitting the same way but annoyed (small frown, arm
 Row 3: walking toward the viewer, two frames each (left foot forward, right foot forward): Customer A, Customer A, Student, Student, Auntie, Auntie, Office worker, Office worker.
 Row 4: the Office worker slipping on a wet floor, surprised, arms up, not hurt; Customer A looking around worried as if searching for something; Customer A, the Student and the Office worker standing and waiting, a little worried (three cells); the Manager standing with one arm held out to the side, politely stopping people; a crumpled white tissue; a crumpled paper straw wrapper.
 Row 5 (objects, front view): an ice machine (wide steel box with a small window and an ice chute at the bottom); a clear drinking glass; an open white plastic ice bucket with a handle; an open brown cardboard box for carrying cups; an open steel ice storage bin; a cup dispenser rack with stacked paper cups; a glass bread showcase seen straight from the front with empty shelves; a kitchen pass-through window opening in a wall with a steel shelf.
-Row 6 (mess, seen from above): bread crumbs; a brown coffee ring stain; a sticky yellow syrup spill; a small grey dust bunny; a medium grey dust bunny; a big grey dust bunny; a small orange juice puddle; a big orange juice puddle.
+Row 6 (mess, seen from above): bread crumbs; a brown coffee ring stain; a sticky yellow syrup spill; a small, a medium and a big plain clump of grey dust and lint (no face, not an animal); a small orange juice puddle; a big orange juice puddle.
 Row 7: a smartphone lying flat; a white plate with a half-eaten croissant; a coffee cup on a saucer; a tied white trash bag; an open trash bag, half full; a liquid soap pump bottle; a stack of folded paper towels; cell 8 is a spare cell with only a small plain closed cardboard box in the middle.
 
 Background: one solid flat chroma-key green (#00FF00) over the whole image. No grid lines, no borders, no labels, no text, no letters, no numbers, no ground shadows, no lines radiating from anything.

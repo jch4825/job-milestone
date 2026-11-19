@@ -25,8 +25,9 @@ Flow로 만든 SD 픽셀 그림 → 게임용 픽셀 시트 (assets/pixel/*.png 
     - 줄 높이가 고르지 않아 그림마다 상자(원본 좌표)를 적고, 상자 안에 가운데가 있는 조각만 모읍니다(팔·물웅덩이가 넘쳐도 됨).
     - 사람(people)은 연우처럼 같은 크기의 칸에 머리 가운데·발끝(앉은 사람은 의자 다리 끝)을 맞추고, unit 도 연우와 같은 키 기준.
     - 물건(mg_objects)은 원본 크기 그대로(unit 1).
-    - 같은 프롬프트로 만든 다른 그림에서 두 가지만 가져옵니다(MG_OTHER): 먼지(이 시트의 먼지는 토끼처럼 그려져서
-      px_minigame_dust.jpg 의 털뭉치를 얼굴을 지워) · 빈 양동이(이 시트의 양동이는 얼음이 담겨 있어 px_minigame_bucket.jpg).
+    - 두 가지만 다른 그림에서 가져옵니다(MG_OTHER): 먼지(이 시트의 먼지는 토끼처럼 그려져서, 이 시트를 Flow 고치기로
+      먼지 세 칸만 다시 그린 2K 그림 px_minigame_dust.jpg 를 반으로 줄여) · 빈 양동이(이 시트의 양동이는 얼음이 담겨 있어
+      같은 프롬프트로 만든 다른 그림 px_minigame_bucket.jpg).
 """
 
 from __future__ import annotations
@@ -145,17 +146,18 @@ MG_WIDE = {'slip_daeri'}   # 머리 대신 그림 가운데를 맞춤(누운 자
 MG_OBJECTS = {
     'tissue': (790, 521, 896, 684), 'straw_wrapper': (896, 521, 1024, 684),
     **row8(684, 828, ['ice_machine', 'glass', None, 'cup_box', 'ice_bin', 'cup_rack', 'showcase', 'kitchen_window']),   # 3칸 양동이는 얼음이 담겨 있어 MG_OTHER 로
-    **row8(828, 918, ['crumbs', 'coffee_ring', 'syrup', None, None, None, 'juice_small', 'juice_big']),   # 4~6칸 먼지(토끼 모양)는 안 씀
+    **row8(828, 918, ['crumbs', 'coffee_ring', 'syrup', None, None, None, 'juice_small', 'juice_big']),   # 4~6칸 먼지(토끼 모양)는 다시 그린 그림에서(MG_OTHER)
     **row8(918, 1024, ['phone', 'plate', 'coffee_cup', 'bag_tied', 'bag_open', 'soap', 'towels', None]),  # 8칸은 버리는 칸
 }
-# 다른 그림에서 가져오는 것: 이름 → (원본, 상자, 얼굴 지우기). 같은 프롬프트로 만든 다른 시트(1376×768)
-#  - 먼지: 이 시트의 먼지는 토끼처럼 그려져서, 털뭉치에 가까운 그림을 얼굴(눈·입)을 지워 씀
-#  - 양동이: 이 시트의 양동이는 얼음이 담겨 있어, 받는 얼음이 쌓여 보이게 빈 양동이 그림
+# 다른 그림에서 가져오는 것: 이름 → (원본, 상자)
+#  - 먼지: 이 시트의 먼지는 토끼처럼 그려져서, 이 시트를 Flow 고치기로 먼지 세 칸만 다시 그린 그림(2048×2048, 2026-11-19).
+#    칸 자리가 이 시트와 같아 상자도 이 시트 좌표(MG_HALF 로 반으로 줄여 같은 픽셀 크기로)
+#  - 양동이: 이 시트의 양동이는 얼음이 담겨 있어, 받는 얼음이 쌓여 보이게 같은 프롬프트로 만든 다른 시트(1376×768)의 빈 양동이
 MG_OTHER = {
-    'dust_small': ('px_minigame_dust.jpg', (850, 585, 940, 665), True),
-    'dust_big': ('px_minigame_dust.jpg', (975, 580, 1080, 675), True),
-    'ice_bucket': ('px_minigame_bucket.jpg', (405, 588, 512, 690), False),
+    **{n: ('px_minigame_dust.jpg', box) for n, box in row8(828, 918, [None, None, None, 'dust_small', 'dust_mid', 'dust_big']).items()},
+    'ice_bucket': ('px_minigame_bucket.jpg', (405, 588, 512, 690)),
 }
+MG_HALF = {'px_minigame_dust.jpg'}   # 2K 로 받은 그림: 반으로 줄여 이 시트(1024)와 같은 픽셀 크기로
 
 
 def cell_box(r: int, c: int, W: int, H: int) -> tuple[int, int, int, int]:
@@ -579,38 +581,17 @@ def head_x(alpha: np.ndarray) -> tuple[float, int, int]:
     return float((xs[head].min() + xs[head].max()) / 2), top, bot
 
 
-def erase_face(arr: np.ndarray) -> np.ndarray:
-    """털뭉치 먼지의 눈·입(안쪽의 아주 어두운 점)을 둘레의 털 색으로 메움 — 먼지가 동물로 보이지 않게"""
-    solid = arr[..., 3] > 160
-    inner = ~dilate(~solid, 5)
-    face = dilate(inner & (arr[..., :3].mean(-1) < 85), 1) & inner
-    out = arr.copy()
-    known = solid & ~face
-    for _ in range(20):
-        todo = face & ~known
-        if not todo.any():
-            break
-        acc = np.zeros(arr.shape[:2] + (3,), np.float32)
-        n = np.zeros(arr.shape[:2], np.float32)
-        for dy in (-1, 0, 1):
-            for dx in (-1, 0, 1):
-                k = np.roll(np.roll(known, dy, 0), dx, 1)
-                acc += np.roll(np.roll(out[..., :3], dy, 0), dx, 1) * k[..., None]
-                n += k
-        fill = todo & (n > 0)
-        out[..., :3][fill] = acc[fill] / n[fill][:, None]
-        known |= fill
-    return out
-
-
 def build_minigame(check: bool = False) -> int:
     srcs = {}   # 원본 이름 → (RGB, 배경 초록)
-    for name in ['px_minigame_sheet.jpg', *sorted({f for f, _, _ in MG_OTHER.values()})]:
+    for name in ['px_minigame_sheet.jpg', *sorted({f for f, _ in MG_OTHER.values()})]:
         p = SRC_DIR / name
         if not p.exists():
             print(f'원본이 없어요: {p.relative_to(ROOT)}')
             return 1
-        rgb = np.asarray(Image.open(p).convert('RGB'))
+        im = Image.open(p).convert('RGB')
+        if name in MG_HALF:
+            im = im.resize((im.width // 2, im.height // 2), Image.BOX)
+        rgb = np.asarray(im)
         border = np.concatenate([rgb[:6].reshape(-1, 3), rgb[:, :6].reshape(-1, 3)])   # 위·왼쪽(오른쪽 아래 Gemini 표시는 빼고)
         srcs[name] = (rgb, np.median(border, axis=0).astype(np.float32))
     sheet, bg = srcs['px_minigame_sheet.jpg']
@@ -647,14 +628,12 @@ def build_minigame(check: bool = False) -> int:
 
     # ---- 물건: 원본 크기 그대로(unit 1)
     objs = {}
-    todo = [(n, 'px_minigame_sheet.jpg', box, False) for n, box in MG_OBJECTS.items()] + [(n, *v) for n, v in MG_OTHER.items()]
-    for name, src_name, box, face in todo:
+    todo = [(n, 'px_minigame_sheet.jpg', box) for n, box in MG_OBJECTS.items()] + [(n, *v) for n, v in MG_OTHER.items()]
+    for name, src_name, box in todo:
         rgb_all, bgc = srcs[src_name]
         _, _, rgb, keep = mg_pick(rgb_all, box)
         arr = key_objects(rgb, False, bgc)
         arr[..., 3] *= dilate(keep, 2)
-        if face:
-            arr = erase_face(arr)
         x0, y0, x1, y1 = bbox(arr[..., 3])
         objs[name] = to_rgba(arr).crop((max(0, x0 - 2), max(0, y0 - 2), x1 + 2, y1 + 2))
     things, ometa = pack(objs, width=1024)

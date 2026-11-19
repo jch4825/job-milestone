@@ -169,10 +169,12 @@
 
 ## 2026-10-26 SD 픽셀 미니게임 사람·물건·얼룩 시트
 
-`npm run pixel`(`tools/import-pixel-sheet.py` minigame)이 이 원본으로 게임용 `assets/pixel/people.png`(손님·점장님·민재 30장)·`mg_objects.png`(물건·얼룩·먼지 24개)를 만듭니다(docs/image_requests.md G-4). 같은 프롬프트로 만든 5장 중 **연우 시트와 같은 픽셀 결이고 칸이 프롬프트대로인 정사각형 1장**을 쓰고, 나머지 4장(1376×768, 매끈한 스티커 그림체) 중 두 장에서 한 가지씩만 가져왔습니다: 먼지(이 시트의 먼지는 토끼처럼 그려져서 털뭉치에 가까운 그림을 얼굴을 지워) · 빈 양동이(이 시트의 양동이는 얼음이 담겨 있어서). 쓰지 않은 2장(`Pixel_art_cafe_game_asset_20261026000405.jpg`: 유리컵·얼음통 없음, `Cafe_minigame_asset_sheet_20261026000415.jpg`: 먼지가 쥐 모양·칸 순서 섞임)은 휴지통으로 보냈습니다.
+`npm run pixel`(`tools/import-pixel-sheet.py` minigame)이 이 원본으로 게임용 `assets/pixel/people.png`(손님·점장님·민재 30장)·`mg_objects.png`(물건·얼룩·먼지 25개)를 만듭니다(docs/image_requests.md G-4). 같은 프롬프트로 만든 5장 중 **연우 시트와 같은 픽셀 결이고 칸이 프롬프트대로인 정사각형 1장**을 쓰고, 나머지 4장(1376×768, 매끈한 스티커 그림체) 중 두 장에서 한 가지씩만 가져왔습니다: 먼지(이 시트의 먼지는 토끼처럼 그려져서 털뭉치에 가까운 그림을 얼굴을 지워) · 빈 양동이(이 시트의 양동이는 얼음이 담겨 있어서). 쓰지 않은 2장(`Pixel_art_cafe_game_asset_20261026000405.jpg`: 유리컵·얼음통 없음, `Cafe_minigame_asset_sheet_20261026000415.jpg`: 먼지가 쥐 모양·칸 순서 섞임)은 휴지통으로 보냈습니다.
+
+2026-11-19: 먼지는 쓰던 시트(`…000258`)를 Flow 고치기로 먼지 세 칸만 다시 그린 그림으로 바꿨습니다(얼굴 없는 먼지 뭉치 세 크기). 그 전에 먼지를 가져오던 `Cafe_game_asset_sheet_20261026000412.jpg`는 git 기록(c58bfd4)에만 남아 있습니다.
 
 | 원본(ID 이름) | 원래 파일 이름 |
 | :--- | :--- |
 | `pixel/px_minigame_sheet.jpg` | `Cafe_game_asset_sheet_20261026000258.jpg` (1024×1024 · 8칸 × 7줄, 사람·물건 모두) |
-| `pixel/px_minigame_dust.jpg` | `Cafe_game_asset_sheet_20261026000412.jpg` (1376×768 · 먼지 두 크기만 씀) |
+| `pixel/px_minigame_dust.jpg` | `Cafe_game_asset_sheet_2ca6d68f_2K.jpg` (2048×2048 · `…000258` 시트에서 먼지 세 칸만 Flow 고치기로 다시 그림, 2026-11-19 · 반으로 줄여 먼지 세 크기만 씀) |
 | `pixel/px_minigame_bucket.jpg` | `Pixel_art_cafe_asset_sheet_20261026000409.jpg` (1376×768 · 빈 양동이만 씀) |
